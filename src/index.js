@@ -26,9 +26,11 @@ function searchImages(evt) {
                 const markup = template({ elem })
                 gallery.insertAdjacentHTML('beforeend', markup)
                 btn.classList.remove('opacity')
+                evt.target.value = ""
             })
         }
         else {
+            btn.classList.add('opacity')
             alert('Введіть коректне значення!')
         }
     })
