@@ -6,6 +6,7 @@ import debounce from 'debounce'
 const form = document.querySelector('.form-box');
 const gallery = document.querySelector('.gallery-list')
 const btn = document.querySelector('.btn')
+const element = document.querySelector('.gallery-box');
 
 markupForm()
 const input = document.querySelector('[name="query"]')
@@ -44,15 +45,19 @@ function loadMoreImage() {
 data.hits.map((elem) => {
     const markup = template({ elem })
     gallery.insertAdjacentHTML('beforeend', markup)
+    
+    setTimeout(() => 
+        scroll()
+    , 0) 
+    })
+    })
+}
 
-    const element = document.querySelector('.gallery-box');
-element.scrollIntoView({
+function scroll() {
+ element.scrollIntoView({
 behavior: 'smooth',
 block: 'end',
 });
-            
-        })
-    })
 }
 
 function changePage() {

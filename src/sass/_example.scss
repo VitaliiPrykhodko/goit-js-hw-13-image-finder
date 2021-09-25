@@ -1,6 +1,8 @@
 body {
-  background-image: url('../images/fon.jpg');
   font-family: Cairo, sans-serif;
+  background-image: url('../images/fon.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .gallery-list {
