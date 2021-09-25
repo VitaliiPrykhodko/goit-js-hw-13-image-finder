@@ -42,22 +42,24 @@ function searchImages(evt) {
 function loadMoreImage() {
     changePage()
     newApiService.makeFetch().then(data => {
-data.hits.map((elem) => {
+        data.hits.map((elem) => {
     const markup = template({ elem })
-    gallery.insertAdjacentHTML('beforeend', markup)
-    
-    setTimeout(() => 
+            gallery.insertAdjacentHTML('beforeend', markup)
+        })
         scroll()
-    , 0) 
-    })
     })
 }
 
 function scroll() {
- element.scrollIntoView({
-behavior: 'smooth',
-block: 'end',
-});
+const promise = new Promise((resolve) => {
+    setTimeout(() => {
+        resolve(element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+}))
+    }, 400)
+})
+    return promise
 }
 
 function changePage() {
