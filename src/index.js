@@ -1,6 +1,7 @@
 import './sass/main.scss';
 import apiService from './js/apiService.js'
 import template from './template/template.hbs'
+import debounce from 'debounce'
 
 const form = document.querySelector('.form-box');
 const gallery = document.querySelector('.gallery-list')
@@ -8,11 +9,11 @@ const btn = document.querySelector('.btn')
 
 markupForm()
 const input = document.querySelector('[name="query"]')
-input.addEventListener('change', searchImages)
+input.addEventListener('input', debounce(searchImages, 1000))
 btn.addEventListener('click', loadMoreImage)
 
 const newApiService = new apiService()
-btn.classList.add('opacity')
+btn.classList.add('visibility')
 
 function searchImages(evt) {
     evt.preventDefault()
@@ -25,12 +26,12 @@ function searchImages(evt) {
             data.hits.map((elem) => {
                 const markup = template({ elem })
                 gallery.insertAdjacentHTML('beforeend', markup)
-                btn.classList.remove('opacity')
+                btn.classList.remove('visibility')
                 evt.target.value = ""
             })
         }
         else {
-            btn.classList.add('opacity')
+            btn.classList.add('visibility')
             alert('Введіть коректне значення!')
         }
     })
@@ -44,7 +45,7 @@ data.hits.map((elem) => {
     const markup = template({ elem })
     gallery.insertAdjacentHTML('beforeend', markup)
 
-    const element = document.getElementById('box');
+    const element = document.querySelector('.gallery-box');
 element.scrollIntoView({
 behavior: 'smooth',
 block: 'end',
